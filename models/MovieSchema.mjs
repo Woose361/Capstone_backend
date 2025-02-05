@@ -3,15 +3,12 @@ import mongoose from 'mongoose';
 const MovieSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: true,
+    
   },
-  name: {
+  
+  overview: {
     type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
+    
   },
   createdAt: {
     type: Date,

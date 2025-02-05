@@ -1,5 +1,5 @@
 import express from 'express';
-import Movie from '../controllers/MovieController.mjs';
+import Movie from '../models/MovieSchema.mjs';
 const router = express.Router();
 
 // Create a movie
@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
         const { title, name, description } = req.body;
         const newMovie = new Movie({ title, name, description });
         await newMovie.save();
-        res.json(201).json(newMovie);
+        res.status(201).json(newMovie);
     } catch (err) {
         console.error('Error creating movie', err);
         res.status(500).json({ msg: 'Failed to add movie ' });
@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) =>     {
     try {
         const movies = await Movie.find();
-        res.json(200).json(movies);
+        res.status(200).json(movies);
     } catch (err) {
         console.error(err);
         res.status(500).json({ msg: 'Server Error' });
@@ -49,7 +49,7 @@ router.put('/:id', async (req, res) => {
             if(!updatedMovieovies) {
             return res.status(404).json({ msg: 'Movie not found' });
         } 
-        res.json(200).json(updatedMovie);
+        res.status(200).json(updatedMovie);
     } catch (err) {
         console.error(err);
         res.status(500).json({ msg: 'Server Error' });
